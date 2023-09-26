@@ -179,6 +179,9 @@ button:focus {
   margin: 0 auto;
   max-width: 70%;
 }
+.done-playing .medium-btn {
+  margin: 1.2em;
+}
 
 @media (max-width: 600px) {
   .done-playing {
