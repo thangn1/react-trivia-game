@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  
+}
+#root {
+  height: 100vh;
+}
+.main {
+  /* background-color needed to be moved to blobs, so its negative z-index could fix 'element over top scrollbar'*/ 
+  position: relative;
+  overflow: auto; /* need overflow auto, so that if view-width is small, vertical scrollbar appears*/
+  height: 100%;
+}
+
+/* blobs is needed so that blobs:before and :after have a parent for absolute positioning and can lay on top of main with overflow hidden*/
+.blobs {
+  position: fixed; /*need position: fixed instead of absolute, because absolute blobs don't always stay at bottom of page when scrollable, even with janky code.*/
+  top: 0;
+  bottom: 0;
+  min-height: 100%;
+  width: 100%;
+  pointer-events:none;
+  z-index: -1;
+  background-color: #F5F7FB;
+}
+.blobs::before {
+  content: url(./assets/blob_yellow.png);
+  position: absolute;
+  top: -150px;
+  right: -150px;
+
+}
+.blobs::after {
+  content: url(./assets/blob_blue.png);
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+}
+
+h1, h2, h3, h4 {
+  color: #293264;
+  margin: 0;
+}
+
+button {
+  display: block;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+button:hover,
+button:focus {
+  background-color: #5767B3;
+}
+
+
+.start-screen {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 1em;
+}
+.start-screen h1 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+}
+.start-screen h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 1em auto;
+}
+.start-screen button {
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 1em 3em;
+  margin: 0.5em auto 2.5em;
+}
+
+.medium-btn {
+  font-family: 'Inter', sans-serif;
+  padding: 1em 2em;
+  margin: 1.2em auto;
+  font-weight: 500;
+}
+
+.question-sheet {
+  position: relative;
+  z-index: 1;
+  width: 72%;
+  margin: 2em auto;
+}
+.question-sheet h3 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75em; 
+}
+.question {
+  border-bottom: 1px solid #DBDEF0;
+  padding: 1em 0;
+}
+.question form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
+}
+/* Style radio buttons to look like pill buttons, by hiding the radio and styling the label*/
+.question input {
+  display: none;
+}
+.question label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em 2em;
+  border: 1px solid #293264; 
+  border-radius: 20px;
+  color: #293264;
+  background-color: #F5F7FB;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.5em;
+  width: 100%;
+  text-align: center;
+}
+.question .choice {
+  margin: 0.5em; 
+  flex-grow: 1;
+}
+.question input:checked + label {
+  background-color: #D6DBF5;
+  border: 1px solid #D6DBF5;
+}
+.question .category {
+  font-weight: 400;
+  display: block;
+  margin-bottom: 0.25em;
+}
+
+/* Conditional css classes based on if answer chosen is correct */
+.right-answer {
+  background-color: #94D7A2 !important;
+  border: 1px solid #94D7A2 !important;
+  pointer-events: none;
+}
+.wrong-answer {
+  background-color: #D6949C !important;
+  border: 1px solid #D6949C !important;
+}
+.fade-answer {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.question-sheet h4 {
+  font-family: 'Karla', sans-serif;
+  text-align: center;
+  margin: 1em 0;
+  padding: 0 0.5em;
+}
+
+.done-playing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 70%;
+}
+
+@media (max-width: 600px) {
+  .done-playing {
+    flex-direction: column;
+  }
+  .question-sheet h4 {
+    margin-bottom: 0;
+  }
+}
