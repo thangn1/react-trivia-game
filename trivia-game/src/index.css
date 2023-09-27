@@ -115,13 +115,15 @@ button:focus {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-content: stretch;
+  align-items: stretch;
 }
 /* Style radio buttons to look like pill buttons, by hiding the radio and styling the label*/
 .question input {
   display: none;
 }
 .question label {
-  display: inline-block;
+  display: flex;
   cursor: pointer;
   padding: 0.5em 2.5em;
   border: 1px solid #293264; 
@@ -133,12 +135,16 @@ button:focus {
   font-weight: 500;
   line-height: 1.5em;
   width: 100%;
+  height: 100%;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .question .choice {
   margin: 0.5em; 
-  /* flex-grow: 1; */
-  min-width: 20%;
+  flex-grow: 1;
+  /* min-width: 20%; */
+  max-width: 45%;
 }
 .question input:checked + label {
   background-color: #D6DBF5;
@@ -189,5 +195,10 @@ button:focus {
   }
   .question-sheet h4 {
     margin-bottom: 0;
+  }
+}
+@media (max-width: 480px) {
+  .question .choice {
+    max-width: 100%;
   }
 }
